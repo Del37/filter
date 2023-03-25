@@ -1,13 +1,12 @@
-import './App.css';
-import { useState } from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
+import { useState } from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import "./App.css";
 
 function MediaCard({ tag }) {
   return (
@@ -29,20 +28,19 @@ function MediaCard({ tag }) {
   );
 }
 
-function CardList( { tags } ) {
+function CardList({ tags }) {
   const cardList = tags.map((tag, index) => {
     return (
       <li key={index}>
-        <MediaCard tag={tag}/>
+        <MediaCard tag={tag} />
       </li>
     );
   });
 
   return <ul>{cardList}</ul>;
-
 }
 
-function TagSearch( { tags, selectedTags, setSelectedTags } ) {
+function TagSearch({ tags, selectedTags, setSelectedTags }) {
   const handleTagChange = (event, value) => {
     setSelectedTags(value);
   };
@@ -57,22 +55,30 @@ function TagSearch( { tags, selectedTags, setSelectedTags } ) {
       onChange={handleTagChange}
       getOptionLabel={(tag) => tag}
       renderInput={(params) => (
-        <TextField {...params} label="limitTags" placeholder="Favorites" />
+        <TextField
+          {...params}
+          label="Favorites"
+          placeholder="Choose your favorite tags"
+        />
       )}
-      sx={{ width: '500px' }}
+      sx={{ width: "500px", marginBottom: "20px" }}
     />
   );
 }
 
 function App() {
-  const tags = ['one', 'two', 'three'];
-  const [ selectedTags, setSelectedTags ] = useState(['one', 'two', 'three']);
+  const tags = ["one", "two", "three"];
+  const [selectedTags, setSelectedTags] = useState(["one", "two", "three"]);
 
   return (
-    <>
-      <TagSearch tags={tags} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
-      <CardList tags={selectedTags}/>
-    </>
+    <div className="App">
+      <TagSearch
+        tags={tags}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+      />
+      <CardList tags={selectedTags} />
+    </div>
   );
 }
 
