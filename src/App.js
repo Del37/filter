@@ -42,13 +42,19 @@ function CardList( { tags } ) {
 
 }
 
-function TagSearch( { tags, selectedTags } ) {
+function TagSearch( { tags, selectedTags, setSelectedTags } ) {
+  const handleTagChange = (event, value) => {
+    setSelectedTags(value);
+  };
+
   return (
     <Autocomplete
       multiple
       limitTags={2}
       id="multiple-limit-tags"
       options={tags}
+      value={selectedTags}
+      onChange={handleTagChange}
       getOptionLabel={(tag) => tag}
       renderInput={(params) => (
         <TextField {...params} label="limitTags" placeholder="Favorites" />
@@ -64,7 +70,8 @@ function App() {
 
   return (
     <>
-      <TagSearch tags={tags} selectedTags={selectedTags} />
+      <TagSearch tags={tags} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
+      <CardList tags={selectedTags}/>
     </>
   );
 }
